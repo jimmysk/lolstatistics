@@ -12,5 +12,5 @@ body {
 </style>
 @stop
 @section('content')
-    
+
 @stop
