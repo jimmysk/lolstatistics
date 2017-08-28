@@ -12,7 +12,7 @@ function updateChampionsData(){
 
     $champions = json_decode($response, true);
 
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolBestiary');
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
     if($con->connect_errno > 0){
         die('Unable to connect to database [' . $con->connect_error . ']');
     }
@@ -106,7 +106,7 @@ function updateChampionsData(){
 }
 
 function selectChampionImages(){
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolBestiary');
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
     if($con->connect_errno > 0){
         die('Unable to connect to database [' . $con->connect_error . ']');
     }
@@ -120,5 +120,71 @@ function selectChampionImages(){
     }
     return $champions;
 }
+
+function selectChampionByName($championName){
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
+    if($con->connect_errno > 0){
+        die('Unable to connect to database [' . $con->connect_error . ']');
+    }
+    
+    $sql = "SELECT * FROM champions WHERE Name='".$championName."'";
+    if(!$champion = $con->query($sql)){
+        die('There was an error running the query [' . $con->error . ']');
+    }
+    else{
+        
+    }
+    return $champion->fetch_array(MYSQLI_ASSOC);
+}
+    
+function selectChampionInfos($championId){
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
+    if($con->connect_errno > 0){
+        die('Unable to connect to database [' . $con->connect_error . ']');
+    }
+    
+    $sql = "SELECT * FROM infos WHERE Champ_ID="+$championId;
+    if(!$infos = $con->query($sql)){
+        die('There was an error running the query [' . $con->error . ']');
+    }
+    else{
+        
+    }
+    return $infos;
+}
+    
+function selectChampionStats($championId){
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
+    if($con->connect_errno > 0){
+        die('Unable to connect to database [' . $con->connect_error . ']');
+    }
+    
+    $sql = "SELECT * FROM stats WHERE Champ_ID="+$championId;
+    if(!$stats = $con->query($sql)){
+        die('There was an error running the query [' . $con->error . ']');
+    }
+    else{
+        
+    }
+    return $stats;
+}
+    
+function selectChampionSkins($championId){
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
+    if($con->connect_errno > 0){
+        die('Unable to connect to database [' . $con->connect_error . ']');
+    }
+    
+    $sql = "SELECT * FROM skins WHERE Champ_ID="+$championId;
+    if(!$skins = $con->query($sql)){
+        die('There was an error running the query [' . $con->error . ']');
+    }
+    else{
+        
+    }
+    return $skins;
+}
+    
+
 
 ?>

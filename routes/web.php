@@ -12,9 +12,8 @@
 */
 
 Route::get('/', ['uses' => 'IndexController@index']);
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+
+Route::get('/champion/{championName}', [ 'uses' => 'ChampionController@championPage']);
 
 Auth::routes();
 

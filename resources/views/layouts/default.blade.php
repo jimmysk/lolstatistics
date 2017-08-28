@@ -2,6 +2,7 @@
 <html>
 <head>
     @include('includes.head')
+    @yield('head_content')
 </head>
 <body>
 <div class="container">
