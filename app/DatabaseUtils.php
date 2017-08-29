@@ -126,6 +126,9 @@ function selectChampionByName($championName){
     if($con->connect_errno > 0){
         die('Unable to connect to database [' . $con->connect_error . ']');
     }
+    if (strpos($championName, '\'') == true){
+        $championName = substr_replace($championName, '\\', strpos($championName, '\''),0);
+    }
 
     $sql = "SELECT * FROM champions WHERE Name='".$championName."'";
     if(!$champion = $con->query($sql)){
@@ -183,6 +186,29 @@ function selectChampionSkins($championId){
 
     }
     return $skins;
+}
+
+function nameTransformation($championName){
+
+    $championName = str_replace(' ', "", $championName );
+    $championName = str_replace('.', "", $championName );
+    $championName = str_replace("'", "", $championName );
+
+    if ($championName == 'LeBlanc'){
+        $championName = 'Leblanc';
+    }
+    else if ($championName == 'ChoGath'){
+        $championName = 'Chogath';
+    }
+    else if ($championName == 'KhaZix'){
+        $championName = 'Khazix';
+    }else if ($championName == 'VelKoz'){
+        $championName = 'Velkoz';
+    }else{
+
+    }
+
+    return $championName;
 }
 
 
