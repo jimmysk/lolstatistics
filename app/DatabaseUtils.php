@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Facades\DB;
+
 function updateChampionsData(){
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=image&tags=info&tags=skins&tags=stats&tags=tags&dataById=false&api_key=RGAPI-af1e6d0d-5ccb-40b9-995f-08174f4dc86d');
@@ -106,111 +109,28 @@ function updateChampionsData(){
 }
 
 function selectChampionImages(){
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
-    if($con->connect_errno > 0){
-        die('Unable to connect to database [' . $con->connect_error . ']');
-    }
 
-    $sql = "SELECT name, image FROM champions";
-    if(!$champions = $con->query($sql)){
-        die('There was an error running the query [' . $con->error . ']');
-    }
-    else{
-
-    }
-    return $champions;
+    return DB::table('champions')->select('Name','Image')->get();
 }
 
 function selectChampionByName($championName){
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
-    if($con->connect_errno > 0){
-        die('Unable to connect to database [' . $con->connect_error . ']');
-    }
-    if (strpos($championName, '\'') == true){
-        $championName = substr_replace($championName, '\\', strpos($championName, '\''),0);
-    }
-
-    $sql = "SELECT * FROM champions WHERE Name='".$championName."'";
-    if(!$champion = $con->query($sql)){
-        die('There was an error running the query [' . $con->error . ']');
-    }
-    else{
-
-    }
-    return $champion->fetch_array(MYSQLI_ASSOC);
+  
+    return DB::table('champions')->where('Name','=',$championName)->first();
 }
 
 function selectChampionInfos($championId){
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
-    if($con->connect_errno > 0){
-        die('Unable to connect to database [' . $con->connect_error . ']');
-    }
 
-    $sql = "SELECT * FROM infos WHERE Champ_ID="+$championId;
-    if(!$infos = $con->query($sql)){
-        die('There was an error running the query [' . $con->error . ']');
-    }
-    else{
-
-    }
-    return $infos;
+    return DB::table('infos')->where('Champ_ID','=',$championId)->first();
 }
 
 function selectChampionStats($championId){
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
-    if($con->connect_errno > 0){
-        die('Unable to connect to database [' . $con->connect_error . ']');
-    }
 
-    $sql = "SELECT * FROM stats WHERE Champ_ID="+$championId;
-    if(!$stats = $con->query($sql)){
-        die('There was an error running the query [' . $con->error . ']');
-    }
-    else{
-
-    }
-    return $stats;
+    return DB::table('stats')->where('Champ_ID','=',$championId)->first();
 }
 
 function selectChampionSkins($championId){
-    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
-    if($con->connect_errno > 0){
-        die('Unable to connect to database [' . $con->connect_error . ']');
-    }
 
-    $sql = "SELECT * FROM skins WHERE Champ_ID="+$championId;
-    if(!$skins = $con->query($sql)){
-        die('There was an error running the query [' . $con->error . ']');
-    }
-    else{
-
-    }
-    return $skins;
+    return DB::table('skins')->where('Champ_ID','=',$championId)->get();
 }
-
-function nameTransformation($championName){
-
-    $championName = str_replace(' ', "", $championName );
-    $championName = str_replace('.', "", $championName );
-    $championName = str_replace("'", "", $championName );
-
-    if ($championName == 'LeBlanc'){
-        $championName = 'Leblanc';
-    }
-    else if ($championName == 'ChoGath'){
-        $championName = 'Chogath';
-    }
-    else if ($championName == 'KhaZix'){
-        $championName = 'Khazix';
-    }else if ($championName == 'VelKoz'){
-        $championName = 'Velkoz';
-    }else{
-
-    }
-
-    return $championName;
-}
-
-
 
 ?>
