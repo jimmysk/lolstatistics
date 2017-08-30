@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -23,6 +24,13 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin');
+        $users = User::all();
+        return view('admin', ['users' => $users]);
+        //return view('admin');
+    }
+
+    public function delete($id){
+        User::where('id', $id)->delete();
+        return redirect('/admin');
     }
 }
