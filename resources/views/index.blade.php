@@ -3,8 +3,8 @@
 @section('content')
     @foreach($champions as $champ)
         <div class="img-with-text" style="float: left; width: 120px;">
-            <a href="champion/{!! $champ['name'] !!}"><img src="https://ddragon.leagueoflegends.com/cdn/7.10.1/img/champion/{!! $champ['image'] !!}" ></img></a>
-            <p>{!! $champ['name'] !!}</p>
+            <a href="champion/{!! $champ->Name !!}"><img src="https://ddragon.leagueoflegends.com/cdn/7.10.1/img/champion/{!! $champ->Image !!}" ></img></a>
+            <p>{!! $champ->Name !!}</p>
         </div>
     @endforeach
     <br style="clear: left;" />

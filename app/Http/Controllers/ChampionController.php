@@ -10,14 +10,12 @@ class ChampionController extends Controller
     public function championPage($championName){
 
         $champion = selectChampionByName($championName);
-//         $champArray = ($champion);
-//         $infos = selectChampionInfos($champArray['id']);
-//         $stats = selectChampionStats($champArray['id']);
-//         $skins = selectChampionSkins($champArray['id']);
+        $infos = selectChampionInfos($champion->ID);
+        $stats = selectChampionStats($champion->ID);
+        $skins = selectChampionSkins($champion->ID);
 
-        $champion['Name'] = nameTransformation($champion['Name']);
 
-        return view('champion', compact('champion'));
+        return view('champion', compact('champion','infos','stats','skins'));
 
     }
 }
