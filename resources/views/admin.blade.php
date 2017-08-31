@@ -18,6 +18,16 @@
 <div class="container">
     <div class="row">
         <legend>Manage Users</legend>
+        <div class="row">
+            <div class="col-md-6 col-lg-4">
+                @if (session('info'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{session('info')}}</strong>
+                </div>
+                @endif
+            </div>
+        </div>
             <table class="table table-striped table-hover ">
               <thead>
                 <tr>
@@ -46,5 +56,4 @@
           </table>
     </div>
 </div>
-
 @endsection
