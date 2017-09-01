@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('content')
 <div class="container">
@@ -45,7 +45,7 @@
                           <td>{{ $user->id}}</td>
                           <td>{{ $user->name}}</td>
                           <td>{{ $user->email}}</td>
-                          <td>{{ $user->created_at}}</td>
+                          <td>{{ $user->created_at->toFormattedDateString()}}</td>
                           <td>
                               <a href='{{ url("/admin/delete/{$user->id}")}}' class="label label-danger">Delete</a>
                           </td>

@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', ['uses' => 'IndexController@index']);
+Route::get('/champions', ['uses' => 'IndexController@index'])->name('champions');
 
 Route::get('/champion/{championName}', [ 'uses' => 'ChampionController@championPage']);
 
