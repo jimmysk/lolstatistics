@@ -23,6 +23,7 @@ body {
     <h3 class="main-text">{!! $champion->Title !!}</h3>
 </div>
 
+<!-- champion infos panel -->
 <div class="row">
 	<div class="col-xs-12 col-md-4">
     	<div class="panel panel-default">
@@ -58,7 +59,66 @@ body {
 		</div>
 	</div>
 </div>
+<!-- ./champion infos panel -->
 
+<!-- champion stats panel -->
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Stats</h4>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-3">
+						<ul class="list-group">
+							<li class="list-group-item" style="background:darkred;">Attack Stats</li>
+							<li class="list-group-item">Attack Damage: {!! $stats->AttackDamage !!}</li>
+							<li class="list-group-item">Attack Damage/Level: {!! $stats->AttackDamagePerLevel !!}</li>
+							<li class="list-group-item">Attack Speed Offset: {!! $stats->AttackSpeedOffset !!}</li>
+							<li class="list-group-item">Attack Speed/Level: {!! $stats->AttackSpeedPerLevel !!}</li>
+							<li class="list-group-item">Attack Range: {!! $stats->AttackRange !!}</li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<ul class="list-group">
+							<li class="list-group-item" style="background:darkgreen;">Defense Stats</li>
+							<li class="list-group-item">HP: {!! $stats->HP !!}</li>
+							<li class="list-group-item">HP/Level: {!! $stats->HPPerLevel !!}</li>
+							<li class="list-group-item">HP Regen: {!! $stats->HPRegen !!}</li>
+							<li class="list-group-item">HP Regen/Level: {!! $stats->HPRegenPerLevel !!}</li>
+							<li class="list-group-item">Armor: {!! $stats->Armor !!}</li>
+							<li class="list-group-item">Armor/Level: {!! $stats->ArmorPerLevel !!}</li>
+							<li class="list-group-item">Spellblock: {!! $stats->SpellBlockPerLevel !!}</li>
+							<li class="list-group-item">Spellblock/Level: {!! $stats->SpellBlockPerLevel !!}</li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<ul class="list-group">
+							<li class="list-group-item" style="background:darkblue;">Magic Stats</li>
+							<li class="list-group-item">MP: {!! $stats->MP !!}</li>
+							<li class="list-group-item">MP/Level: {!! $stats->MpPerLevel !!}</li>
+							<li class="list-group-item">MP Regen: {!! $stats->MPRegen !!}</li>
+							<li class="list-group-item">MP Regen/Level: {!! $stats->MPRegenPerLevel !!}</li>
+						</ul>
+					</div>
+					<div class="col-md-3">
+						<ul class="list-group">
+							<li class="list-group-item" style="background:orangered;">General Stats</li>
+							<li class="list-group-item">Movespeed: {!! $stats->Movespeed !!}</li>
+							<li class="list-group-item">Critical: {!! $stats->Crit !!}</li>
+							<li class="list-group-item">Critical/Level: {!! $stats->CritPerLevel !!}</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ./champion stats panel -->
+
+
+<!-- skins panel -->
 <div class="row">
 	<div class="col-md-12">
 		<div class="panel panel-default">
@@ -73,6 +133,7 @@ body {
 		</div>
 	</div>
 </div>
+<!-- ./skins panel -->
 
 <!-- Skins Modal -->
 <div id="skins-modal" class="modal fade" role="dialog">
