@@ -19,13 +19,13 @@ body {
 @section('content')
 
 <div>
-    <h1 class="main-text">{!! $champion->Name !!}&nbsp;</h1>
+    <h1 class="main-text">{!! $champion->Name !!}</h1>
     <h3 class="main-text">{!! $champion->Title !!}</h3>
 </div>
 
 <!-- champion infos panel -->
 <div class="row">
-	<div class="col-xs-12 col-md-4">
+	<div class="col-md-4">
     	<div class="panel panel-default">
     		<div class="panel-heading">
     			<h4>Champion Infos</h4>		
@@ -58,6 +58,31 @@ body {
         	</div>
 		</div>
 	</div>
+	@if (Auth::user() && !array_key_exists('status', $championMastery))
+	<div class="col-md-2 pull-right">
+		<div class="panel panel-default">
+			<div class="panel-heading" style="text-align: center">
+				<h5>Mastery</h5>
+			</div>
+			<div class="panel-body" style="text-align: center">
+				<div class="row">
+					<div class="col-md-12">
+        	    		<img src="{{ asset('img/master'.$championMastery['championLevel'].'.png') }}" ></img>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 ">
+        	    		@if ($championMastery['chestGranted'] )
+        	    			<img src="{{ asset('img/chest.png') }}" ></img>
+        	    		@else
+        	    			<img src="{{ asset('img/chest.png') }}" class="disabled"></img>
+        	    		@endif
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	@endif
 </div>
 <!-- ./champion infos panel -->
 

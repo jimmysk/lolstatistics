@@ -133,4 +133,36 @@ function selectChampionSkins($championId){
     return DB::table('skins')->where('Champ_ID','=',$championId)->get();
 }
 
+function get_summoner_by_name ($summonerName){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/summoner/v3/summoners/by-name/'.$summonerName.'?api_key=RGAPI-9ec942ee-ab10-4f35-8958-f657e63f06a1');
+    
+    // Set so curl_exec returns the result instead of outputting it.
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // Get the response and close the channel.
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    $summoner = json_decode($response, true);
+    
+    return $summoner;
+}
+
+function get_champion_mastery_by_summoner($championId, $summonerId){
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/'.$summonerId.'/by-champion/'.$championId.'?api_key=RGAPI-9ec942ee-ab10-4f35-8958-f657e63f06a1');
+    
+    // Set so curl_exec returns the result instead of outputting it.
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // Get the response and close the channel.
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    $championMastery = json_decode($response, true);
+    
+    return $championMastery;
+}
+
 ?>
