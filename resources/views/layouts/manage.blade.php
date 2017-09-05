@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sidebar.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -80,16 +81,15 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="management-area">
+                @yield('content')
+            </div>
+
         </nav>
+        @include('includes.sidebar')
     </header>
-
 </div>
-
-    @include('includes.sidebar')
-
-    <div class="management-area">
-        @yield('content')
-    </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

@@ -11,7 +11,7 @@
             </button>
 
             <!-- Branding Image -->
-            <a class="navbar-brand" href="{{ route('login') }}">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 LoL Bestiary
             </a>
         </div>
