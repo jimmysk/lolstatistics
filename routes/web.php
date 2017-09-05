@@ -27,3 +27,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/delete/{id}', 'AdminController@delete');
 });
+
+Route::prefix('manage')->group(function() {
+    Route::get('/', 'ManageController@index');
+    Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
+    Route::get('/users/{id}', 'UserController@destroy');
+    Route::resource('/users', 'UserController');
+});

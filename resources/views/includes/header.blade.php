@@ -38,7 +38,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ route('admin.dashboard') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Admin Dashboard</a>
+                                    <a href="{{ route('manage.dashboard') }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Admin Dashboard</a>
                                     <a href="{{ route('user.logout') }}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Logout</a>
 
                                     <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
