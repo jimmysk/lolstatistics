@@ -1,6 +1,6 @@
 .management-area {
-  position: absolute;
+  position: fixed;
   top: 10rem;
-  left: 190px;
-  right: 0px;
+  left: 400px;
+  right: 0;
 }

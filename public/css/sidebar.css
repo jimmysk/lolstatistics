@@ -1,7 +1,7 @@
 .wrapper {
   position: absolute;
   top: 5rem;
-  left: 143px;
+  left: auto;
   bottom: 0;
   width: 200px;
   background-color: #09191F;
