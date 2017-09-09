@@ -5,6 +5,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-lg-8">
+            <div class="pull-right">
+                <a href="{{ route('users.create') }}" class="btn btn-success">Create New User</a>
+            </div>
             <legend>Manage Users</legend>
             <div class="row">
                 <div class="col-md-6 col-lg-4">
@@ -35,11 +38,12 @@
                           <td>{{ $user->email}}</td>
                           <td>{{ $user->created_at->toFormattedDateString()}}</td>
                           <td>
-                              <a href="#" class="btn btn-warning btn-xs">Edit</a> |
-                              @if ($user->id == 1)
+                              <a href="{{ route('users.show', $user->id) }}" class="btn btn-info btn-xs">View</a> |
+                              <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning btn-xs">Edit</a> |
+                              @if ($user->admin == 1)
                                 <a href="#" class="btn btn-danger disabled btn-xs">Delete</a>
                               @else
-                                <a href='{{ url("/manage/users/{$user->id}")}}' class="btn btn-danger btn-xs">Delete</a>
+                                <a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger btn-xs">Delete</a>
                               @endif
                           </td>
                         </tr>
@@ -49,6 +53,7 @@
           </table>
       </div>
     </div>
+    {{$users->links()}}
 </div>
 
 @endsection

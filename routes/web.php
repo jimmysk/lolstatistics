@@ -24,6 +24,6 @@ Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logou
 Route::prefix('manage')->group(function() {
     Route::get('/', 'ManageController@index');
     Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
-    Route::get('/users/{id}', 'UserController@destroy');
+    //Route::get('/users/{id}', 'UserController@destroy');
     Route::resource('/users', 'UserController');
 });

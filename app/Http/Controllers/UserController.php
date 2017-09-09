@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use DB;
+use Hash;
 
 class UserController extends Controller
 {
@@ -14,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        //$users = User::all();
+        $users = User::orderBy('id','desc')->paginate(10);
         return view('manage.table')->withUsers($users);
     }
 
@@ -25,7 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('manage.create');
     }
 
     /**
@@ -36,7 +39,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+        'name' => 'required|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6|confirmed',
+      ]);
+
+      $user = new User();
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = Hash::make($request->password);
+      $user->admin = 0;
+
+      if ($user->save()){
+          return redirect()->route('users.show', $user->id);
+      } else {
+          return redirect()->route('users.create');
+      }
     }
 
     /**
@@ -47,7 +66,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view("manage.show")->withUser($user);
     }
 
     /**
@@ -58,7 +78,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view("manage.edit")->withUser($user);
     }
 
     /**
@@ -70,7 +91,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+        'name' => 'required|max:255',
+        'email' => 'required|email|unique:users,email,'.$id,
+        'admin' => 'required|boolean'
+      ]);
+
+      $user = User::findOrFail($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->admin = $request->admin;
+
+      if ($user->save()){
+          return redirect()->route('users.show', $user->id);
+      } else {
+          return redirect()->route('users.edit', $user->id);
+      }
     }
 
     /**
