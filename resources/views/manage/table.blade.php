@@ -43,7 +43,7 @@
                               @if ($user->admin == 1)
                                 <a href="#" class="btn btn-danger disabled btn-xs">Delete</a>
                               @else
-                                <a href="{{ route('users.destroy', $user->id) }}" class="btn btn-danger btn-xs">Delete</a>
+                                <a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger btn-xs">Delete</a>
                               @endif
                           </td>
                         </tr>
