@@ -1,10 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+
 
 function updateChampionsData(){
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=image&tags=info&tags=skins&tags=stats&tags=tags&dataById=false&api_key=RGAPI-af1e6d0d-5ccb-40b9-995f-08174f4dc86d');
+    $riot_api_key = Config::get('constants.riot_api_key');
+    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/static-data/v3/champions?locale=en_US&tags=image&tags=info&tags=skins&tags=stats&tags=tags&dataById=false&api_key='.$riot_api_key);
 
     // Set so curl_exec returns the result instead of outputting it.
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -135,8 +138,9 @@ function selectChampionSkins($championId){
 
 function get_summoner_by_name ($summonerName){
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/summoner/v3/summoners/by-name/'.$summonerName.'?api_key=RGAPI-9ba868c2-5e8d-4f2e-9492-c854b4393f43');
-
+    $riot_api_key = Config::get('constants.riot_api_key');
+    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/summoner/v3/summoners/by-name/'.$summonerName.'?api_key='.$riot_api_key);
+    
     // Set so curl_exec returns the result instead of outputting it.
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -151,8 +155,9 @@ function get_summoner_by_name ($summonerName){
 
 function get_champion_mastery_by_summoner($championId, $summonerId){
     $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/'.$summonerId.'/by-champion/'.$championId.'?api_key=RGAPI-9ba868c2-5e8d-4f2e-9492-c854b4393f43');
-
+    $riot_api_key = Config::get('constants.riot_api_key');
+    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/'.$summonerId.'/by-champion/'.$championId.'?api_key='.$riot_api_key);
+    
     // Set so curl_exec returns the result instead of outputting it.
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);

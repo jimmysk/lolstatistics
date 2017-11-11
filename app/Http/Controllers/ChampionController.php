@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 include (app_path().'/DatabaseUtils.php');
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+
 class ChampionController extends Controller
 {
 
