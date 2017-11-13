@@ -15,9 +15,11 @@ Route::get('/champions', ['uses' => 'IndexController@index'])->name('champions')
 
 Route::get('/champion/{championName}', [ 'uses' => 'ChampionController@championPage']);
 
+Route::get('/news/{newsId}', [ 'uses' => 'NewsController@newsPage']);
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
 
 

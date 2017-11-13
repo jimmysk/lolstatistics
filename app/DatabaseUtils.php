@@ -116,6 +116,11 @@ function selectChampionImages(){
     return DB::table('champions')->select('Name','Image')->get();
 }
 
+function selectRecommendedChampionImages(){
+    
+    return DB::table('champions')->select('Name','Image')->limit(8)->get();
+}
+
 function selectChampionByName($championName){
 
     return DB::table('champions')->where('Name','=',$championName)->first();
@@ -169,5 +174,15 @@ function get_champion_mastery_by_summoner($championId, $summonerId){
 
     return $championMastery;
 }
+
+function get_latest_news(){
+    
+    return DB::table('news')->select('ID', 'Image', 'Title', 'Summary')->limit(7)->get();
+}
+
+function get_news_by_id($id){
+    return DB::table('news')->where('ID','=',$id)->first();
+}
+
 
 ?>

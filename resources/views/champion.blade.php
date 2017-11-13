@@ -21,6 +21,7 @@ body {
 <div>
     <h1 class="main-text">{!! $champion->Name !!}</h1>
     <h3 class="main-text">{!! $champion->Title !!}</h3>
+    <h4 class="main-text">{!! $champion->Tags !!}</h4>
 </div>
 
 <!-- champion infos panel -->

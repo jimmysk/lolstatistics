@@ -7,3 +7,11 @@
     display: block;
     margin: 0 auto;
 }
+
+.home-image {
+	width: 100%;
+}
+
+.news-thumbnail {
+	width: 100%;
+}

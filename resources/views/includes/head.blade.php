@@ -4,7 +4,7 @@
 
 <title>LoL Statistics</title>
 
-<link rel="stylesheet" type="text/css" href="css/image_view.css">
+<link rel="stylesheet" type="text/css" href="{{ url('css/image_view.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url('css/bootstrap.css') }}">
 <script type="text/javascript" src="{{ url('js/jquery-3.2.1.js') }}"></script>
 <script type="text/javascript" src="{{ url('js/bootstrap.js') }}"></script>

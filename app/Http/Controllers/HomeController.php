@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+include (app_path().'/DatabaseUtils.php');
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,8 +22,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function home()
     {
-        return view('home');
+        $recommendedChampions = selectRecommendedChampionImages();
+        $latestNews = get_latest_news();
+        
+        return view('home', compact('recommendedChampions', 'latestNews'));
     }
 }
