@@ -28,4 +28,6 @@ Route::prefix('manage')->group(function() {
     Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
     Route::get('users/{id}/delete', ['as' => 'users.delete', 'uses' => 'UserController@destroy']);
     Route::resource('/users', 'UserController');
+    Route::get('/news/new', ['as' => 'news.new', 'uses' => 'NewsController@new']);
+    Route::post('/upload', ['as' => 'news.update','uses' => 'NewsController@upload']);
 });

@@ -10,6 +10,7 @@
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
     <script type="text/javascript" src="{{ url('js/jquery-3.2.1.js') }}"></script>
     <script type="text/javascript" src="{{ url('js/bootstrap.js') }}"></script>
+    @yield('head_content')
 </head>
 <body>
     <div class="container">

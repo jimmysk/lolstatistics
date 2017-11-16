@@ -184,5 +184,19 @@ function get_news_by_id($id){
     return DB::table('news')->where('ID','=',$id)->first();
 }
 
+function create_news($title, $summary, $description, $image, $date, $composer){
+    
+    $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
+    if($con->connect_errno > 0){
+        die('Unable to connect to database [' . $con->connect_error . ']');
+    }
+    
+    $sql = "INSERT INTO news(Title, Date, Composer, Summary, Description, Image ) VALUES('$title','$date','$composer','$summary','$description','$image')";
+    if(!$result = $con->query($sql)){
+        die('There was an error running the query [' . $con->error . ']');
+    }
+    
+}
+
 
 ?>
