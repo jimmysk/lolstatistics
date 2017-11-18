@@ -49,6 +49,7 @@
     				<p>{!! $news->Summary !!}</p>
     			</div>
     		</div>
+    		<br></br>
     		@endforeach
     	</div>
     </div>

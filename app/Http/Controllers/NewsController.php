@@ -3,12 +3,26 @@ namespace App\Http\Controllers;
 include (app_path().'/DatabaseUtils.php');
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
+use App\News;
 
 class NewsController extends Controller
 {
     
-    public function newsPage($newsId){
+    public function index()
+    {
+        //$users = User::all();
+        $news = News::orderBy('id','desc')->paginate(10);
+        return view('manage.newsTable')->withNews($news);
+    }
+    
+    public function edit($id)
+    {
+        $news = News::findOrFail($id);
+        return view("manage.editNews")->withNews($news);
+    }
+    
+    
+    public function show($newsId){
     
         $news = get_news_by_id($newsId);
         return view('news', compact('news'));
@@ -20,34 +34,54 @@ class NewsController extends Controller
     }
     
     
-    public function upload(Request $request)
+    
+    public function insert(Request $request)
     {
         
-            echo 'Uploaded';
+            $news = new News;
             $file = $request->file;
+            $news->Title = $request->title;
+//             $news->Composer = $request->composer;
+            $news->Composer = 'admin';
+            $news->Summary = $request->summary;
+            $news->Description = $request->description;
+            
             $file->move('img', $file->getClientOriginalName());
             $imgPath = 'img/'.$file->getClientOriginalName();
             
-            create_news($request->title, $request->summary, $request->description, $imgPath, date("Y-m-d"), 'admin');
-            echo '';
+            $news->Image = $imgPath;
+            $news->save();
+            return redirect('/manage/news')->with('info', 'News Added!');
         
-//         echo 'HELLO';
-//         $this->validate($request, [
-//             'name' => 'required|max:255',
-//             'email' => 'required|string|email|max:255|unique:users',
-//             'password' => 'required|string|min:6|confirmed',
-//         ]);
+    }
+    
+    public function update(Request $request, $id)
+    {
+
+       
+        $news = News::findOrFail($id);
+        $file = $request->file;
+        $news->Title = $request->title;
+        //             $news->Composer = $request->composer;
+        $news->Composer = 'admin';
+        $news->Summary = $request->summary;
+        $news->Description = $request->description;
         
-//         $user = new User();
-//         $user->name = $request->name;
-//         $user->email = $request->email;
-//         $user->password = Hash::make($request->password);
-//         $user->admin = 0;
+        $file->move('img', $file->getClientOriginalName());
+        $imgPath = 'img/'.$file->getClientOriginalName();
         
-//         if ($user->save()){
-//             return redirect()->route('users.show', $user->id);
-//         } else {
-//             return redirect()->route('users.create');
-//         }
+        $news->Image = $imgPath;
+        
+        if ($news->save()){
+            return redirect()->route('news.show', $news->id);
+        } else {
+            return redirect()->route('news.edit', $news->id);
+        }
+    }
+    
+    public function destroy($id)
+    {
+        News::where('id', $id)->delete();
+        return redirect('/manage/news')->with('info', 'User Deleted Successfully!');
     }
 }

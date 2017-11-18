@@ -15,7 +15,7 @@ Route::get('/champions', ['uses' => 'IndexController@index'])->name('champions')
 
 Route::get('/champion/{championName}', [ 'uses' => 'ChampionController@championPage']);
 
-Route::get('/news/{newsId}', [ 'uses' => 'NewsController@newsPage']);
+Route::get('/news/{newsId}', [ 'uses' => 'NewsController@show']);
 
 Auth::routes();
 
@@ -29,5 +29,7 @@ Route::prefix('manage')->group(function() {
     Route::get('users/{id}/delete', ['as' => 'users.delete', 'uses' => 'UserController@destroy']);
     Route::resource('/users', 'UserController');
     Route::get('/news/new', ['as' => 'news.new', 'uses' => 'NewsController@new']);
-    Route::post('/upload', ['as' => 'news.update','uses' => 'NewsController@upload']);
+    Route::post('/upload', ['as' => 'news.insert','uses' => 'NewsController@insert']);
+    Route::resource('/news', 'NewsController');
+    Route::get('news/{id}/delete', ['as' => 'news.delete', 'uses' => 'NewsController@destroy']);
 });
