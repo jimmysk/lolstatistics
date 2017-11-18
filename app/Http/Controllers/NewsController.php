@@ -60,17 +60,21 @@ class NewsController extends Controller
 
        
         $news = News::findOrFail($id);
-        $file = $request->file;
+        
         $news->Title = $request->title;
         //             $news->Composer = $request->composer;
         $news->Composer = 'admin';
         $news->Summary = $request->summary;
         $news->Description = $request->description;
         
-        $file->move('img', $file->getClientOriginalName());
-        $imgPath = 'img/'.$file->getClientOriginalName();
+        if ($request->file != null){
+            $file = $request->file;
+            $file->move('img', $file->getClientOriginalName());
+            $imgPath = 'img/'.$file->getClientOriginalName();
+            $news->Image = $imgPath;
+        }
         
-        $news->Image = $imgPath;
+        
         
         if ($news->save()){
             return redirect()->route('news.show', $news->id);
