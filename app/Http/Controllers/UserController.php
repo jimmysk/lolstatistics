@@ -48,6 +48,7 @@ class UserController extends Controller
       $user = new User();
       $user->name = $request->name;
       $user->email = $request->email;
+      $user->summoner_name = $request->summoner_name;
       $user->password = Hash::make($request->password);
       $user->admin = 0;
 
@@ -100,6 +101,7 @@ class UserController extends Controller
       $user = User::findOrFail($id);
       $user->name = $request->name;
       $user->email = $request->email;
+      $user->summoner_name = $request->summoner_name;
       $user->admin = $request->admin;
 
       if ($user->save()){

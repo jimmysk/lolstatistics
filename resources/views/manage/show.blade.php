@@ -28,6 +28,12 @@
                 </div>
                 <div class="field">
                     <div class="field">
+                        <label for="summoner_name" class="col-lg-2 control-label">Summoner</label>
+                        <pre>{{$user->summoner_name}}</pre>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="field">
                         <label for="admin" class="col-lg-2 control-label">Authorization</label>
                         <pre>{{$user->admin}}</pre>
                     </div>

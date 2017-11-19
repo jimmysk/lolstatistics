@@ -23,6 +23,12 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="summoner_name" class="col-lg-2 control-label">Summoner</label>
+                  <div class="col-lg-10">
+                    <input id="summoner_name" type="text" class="form-control" name="summoner_name" value="{{ $user->summoner_name }}">
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="admin" class="col-lg-2 control-label">Authorization</label>
                   <div class="col-lg-10">
                     <input id="admin" type="text" class="form-control" name="admin" value="{{ $user->admin }}">

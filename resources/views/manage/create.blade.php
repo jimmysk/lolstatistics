@@ -22,6 +22,12 @@
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="summoner_name" class="col-lg-2 control-label">Summoner</label>
+                  <div class="col-lg-10">
+                    <input id="summoner_name" type="text" class="form-control" name="summoner_name" value="{{ old('summoner_name') }}" placeholder="Summoner Name (optional)">
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="password" class="col-lg-2 control-label">Password</label>
                   <div class="col-lg-10">
                     <input id="password" type="password" class="form-control" name="password" required placeholder="Password">
