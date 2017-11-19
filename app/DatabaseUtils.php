@@ -75,10 +75,10 @@ function updateChampionsData(){
 
         $tags_str = implode(",",$tags);
 
-        /*$sql = "INSERT INTO champions(ID, Name, ChampKey, Title, Image, Tags) VALUES('$id','$name','$key','$title','$image','$tags_str')";
+        $sql = "INSERT INTO champions(ID, Name, ChampKey, Title, Image, Tags) VALUES('$id','$name','$key','$title','$image','$tags_str')";
         if(!$result = $con->query($sql)){
             die('There was an error running the query [' . $con->error . ']');
-        }*/
+        }
 
         $sql = "INSERT INTO infos(Champ_ID, Difficulty, Attack, Defense, Magic) VALUES('$id','$difficulty','$attack','$defense','$magic')";
         if(!$result = $con->query($sql)){
@@ -117,7 +117,7 @@ function selectChampionImages(){
 }
 
 function selectRecommendedChampionImages(){
-    
+
     return DB::table('champions')->select('Name','Image')->limit(8)->get();
 }
 
@@ -145,7 +145,7 @@ function get_summoner_by_name ($summonerName){
     $ch = curl_init();
     $riot_api_key = Config::get('constants.riot_api_key');
     curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/summoner/v3/summoners/by-name/'.$summonerName.'?api_key='.$riot_api_key);
-    
+
     // Set so curl_exec returns the result instead of outputting it.
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -162,7 +162,7 @@ function get_champion_mastery_by_summoner($championId, $summonerId){
     $ch = curl_init();
     $riot_api_key = Config::get('constants.riot_api_key');
     curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/'.$summonerId.'/by-champion/'.$championId.'?api_key='.$riot_api_key);
-    
+
     // Set so curl_exec returns the result instead of outputting it.
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -176,7 +176,7 @@ function get_champion_mastery_by_summoner($championId, $summonerId){
 }
 
 function get_latest_news(){
-    
+
     return DB::table('news')->select('ID', 'Image', 'Title', 'Summary')->limit(7)->get();
 }
 
@@ -185,17 +185,17 @@ function get_news_by_id($id){
 }
 
 function create_news($title, $summary, $description, $image, $date, $composer){
-    
+
     $con = new mysqli('127.0.0.1', 'root', '', 'lolbestiary');
     if($con->connect_errno > 0){
         die('Unable to connect to database [' . $con->connect_error . ']');
     }
-    
+
     $sql = "INSERT INTO news(Title, Date, Composer, Summary, Description, Image ) VALUES('$title','$date','$composer','$summary','$description','$image')";
     if(!$result = $con->query($sql)){
         die('There was an error running the query [' . $con->error . ']');
     }
-    
+
 }
 
 

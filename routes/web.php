@@ -32,4 +32,8 @@ Route::prefix('manage')->group(function() {
     Route::post('/upload', ['as' => 'news.insert','uses' => 'NewsController@insert']);
     Route::resource('/news', 'NewsController');
     Route::get('news/{id}/delete', ['as' => 'news.delete', 'uses' => 'NewsController@destroy']);
+    Route::get('/updateapikey', 'UpdateController@show')->name('manage.updateapikey');
+    Route::post('/changekey', 'UpdateController@change')->name('manage.changekey');
+    Route::get('/updatedatabase', 'UpdateController@updatedata')->name('manage.updatedatabase');
+    Route::get('/updatedata', 'UpdateController@newdata')->name('manage.updatedata');
 });

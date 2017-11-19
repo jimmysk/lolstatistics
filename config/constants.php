@@ -1,5 +1,4 @@
 <?php
-
-return[
-    'riot_api_key' => 'RGAPI-d0b18c9a-4c0c-42a0-81d4-1ab611a6cc18'
-];
+ return [
+          'riot_api_key' =>  'RGAPI-9654ec78-85b9-47f8-937d-68e3b7c6c32c'
+  ];

@@ -8,8 +8,7 @@ use Illuminate\Http\Request;
 class IndexController extends Controller
 {
     public function index(){
-
-        //updateChampionsData();
+      
         $champions = selectChampionImages();
 
         return view('index', compact('champions'));

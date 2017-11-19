@@ -8,7 +8,8 @@
             <div>
                 <li><h4><a href="{{route('users.index')}}">Manage Users</a></h4></li>
                 <li><h4><a href="{{route('news.index')}}">Manage News</a></h4></li>
-                <li><h4><a href="#">Update Database</a></h4></li>
+                <li><h4><a href="{{route('manage.updatedatabase')}}">Update Database</a></h4></li>
+                <li><h4><a href="{{route('manage.updateapikey')}}">Update Api-Key</a></h4></li>
             </div>
         </ul>
     </nav>
