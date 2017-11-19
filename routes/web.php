@@ -12,6 +12,8 @@
 */
 
 Route::get('/champions', ['uses' => 'IndexController@index'])->name('champions');
+Route::get('/contact', ['uses' => 'ContactController@contact'])->name('contact');
+Route::post('/contact/send', ['as' => 'contact.send', 'uses' => 'ContactController@send']);
 
 Route::get('/champion/{championName}', [ 'uses' => 'ChampionController@championPage']);
 

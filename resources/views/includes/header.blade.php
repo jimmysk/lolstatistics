@@ -20,6 +20,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ route('champions') }}">Champions</a></li>
+                <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

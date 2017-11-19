@@ -1,6 +1,7 @@
 @extends('layouts.default')
 
 @section('head_content')
+<link href="{{ asset('css/animate.css') }}" rel="stylesheet">
  <style> 
      .jumbotron-bg { 
         
@@ -57,4 +58,42 @@
 </div>
 
 
+@endsection
+
+@section('scripts')
+<script src="{{ asset('js/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	@if (session('info'))
+		$.notify({
+			//options
+			message: '{{session('info')}}' 
+		},{
+			// settings
+			type: 'success',
+			delay: 3000,
+			animate: {
+				enter: "animated fadeInRight", 
+				exit: "animated fadeOutRight"
+			}
+			
+		});
+	@endif
+	@if (session('danger'))
+		$.notify({
+			//options
+			message: '{{session('danger')}}' 
+		},{
+			// settings
+			type: 'danger',
+			delay: 3000,
+			animate: {
+				enter: "animated fadeInRight", 
+				exit: "animated fadeOutRight"
+			}
+			
+		});
+	@endif
+});
+</script>
 @endsection
