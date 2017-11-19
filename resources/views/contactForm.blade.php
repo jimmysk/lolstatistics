@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.default')
 
 @section('head_content')
 <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
