@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('admin');
             $table->string('summoner_name')->nullable();
+            $table->integer('recommendation_tags_id');
+            $table->integer('recommendation_stats_id');
             $table->rememberToken();
             $table->timestamps();
         });

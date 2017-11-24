@@ -170,7 +170,7 @@ body {
         <h4 class="modal-title">Modal Header</h4>
       </div>
       <div class="modal-body">
-        <img width="858" height="506" src=""></img>
+        <img width="100%" height="100%" src=""></img>
       </div>
     </div>
   </div>

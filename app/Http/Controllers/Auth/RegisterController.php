@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\RecommendationTags;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use App\RecommendationStats;
 
 class RegisterController extends Controller
 {
@@ -62,12 +65,28 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $recommendationStats = new RecommendationStats;
+        $recommendationStatsId;
+        $recommendationTagsId;
+        
+        if ($recommendationStats->save()){
+           $recommendationStatsId = $recommendationStats->id;
+        }
+        
+        $recommendationTags = new RecommendationTags;
+        if ($recommendationTags->save()){
+            $recommendationTagsId = $recommendationTags->id;
+        }
+        
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'summoner_name' => $data['summoner_name'],
             'admin' => 0,
+            'recommendation_tags_id' => $recommendationTagsId,
+            'recommendation_stats_id' => $recommendationStatsId,
         ]);
     }
+    
 }

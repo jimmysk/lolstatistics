@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 include (app_path().'/DatabaseUtils.php');
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\News;
 
 class NewsController extends Controller
@@ -42,14 +43,16 @@ class NewsController extends Controller
             $file = $request->file;
             $news->Title = $request->title;
 //             $news->Composer = $request->composer;
-            $news->Composer = 'admin';
+            $news->Composer = Auth::user()->name;
             $news->Summary = $request->summary;
             $news->Description = $request->description;
 
-            $file->move('img', $file->getClientOriginalName());
-            $imgPath = 'img/'.$file->getClientOriginalName();
-
-            $news->Image = $imgPath;
+            if ($request->file != null){
+                $file->move('img', $file->getClientOriginalName());
+                $imgPath = 'img/'.$file->getClientOriginalName();
+    
+                $news->Image = $imgPath;
+            }
             $news->save();
             return redirect('/manage/news')->with('info', 'News Added!');
 
@@ -63,7 +66,7 @@ class NewsController extends Controller
 
         $news->Title = $request->title;
         //             $news->Composer = $request->composer;
-        $news->Composer = 'admin';
+        $news->Composer = Auth::user()->name;
         $news->Summary = $request->summary;
         $news->Description = $request->description;
 
@@ -86,6 +89,6 @@ class NewsController extends Controller
     public function destroy($id)
     {
         News::where('id', $id)->delete();
-        return redirect('/manage/news')->with('info', 'User Deleted Successfully!');
+        return redirect('/manage/news')->with('info', 'News Deleted Successfully!');
     }
 }

@@ -86,11 +86,16 @@
                 </div>
             </div>
         </nav>
-
-        @include('includes.sidebar')
-        <div class="management-area">
-            @yield('content')
-        </div>
+		<div class="row">
+			<div class="col-md-3">
+                @include('includes.sidebar')
+			</div>
+			<div class="col-md-9" style="margin-top: 40px">
+                <div class="management-area">
+                    @yield('content')
+                </div>
+			</div>
+		</div>
 
     </header>
 </div>

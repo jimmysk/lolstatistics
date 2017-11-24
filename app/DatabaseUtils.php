@@ -1,5 +1,7 @@
 <?php
 
+use App\RecommendationStats;
+use App\RecommendationTags;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
@@ -113,12 +115,13 @@ function updateChampionsData(){
 
 function selectChampionImages(){
 
-    return DB::table('champions')->select('Name','Image')->get();
+    return DB::table('champions')->select('Name','Image')->orderBy('Name', 'ASC')->get();
 }
 
-function selectRecommendedChampionImages(){
 
-    return DB::table('champions')->select('Name','Image')->limit(8)->get();
+function selectRecommendedChampions($tag1, $tag2){
+
+    return DB::table('infos')->leftJoin('champions', 'infos.Champ_ID', '=', 'champions.ID')->where('champions.Tags' , 'like', '%'.$tag1.'%')->orWhere('champions.Tags' , 'like', '%'.$tag2.'%')->get();
 }
 
 function selectChampionByName($championName){
@@ -158,6 +161,23 @@ function get_summoner_by_name ($summonerName){
     return $summoner;
 }
 
+function get_matches_by_account_id($accountId){
+    $ch = curl_init();
+    $riot_api_key = Config::get('constants.riot_api_key');
+    curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/match/v3/matchlists/by-account/'.$accountId.'/recent?api_key='.$riot_api_key);
+    
+    // Set so curl_exec returns the result instead of outputting it.
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    // Get the response and close the channel.
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    $recentMatches = json_decode($response, true);
+    
+    return $recentMatches;
+}
+
 function get_champion_mastery_by_summoner($championId, $summonerId){
     $ch = curl_init();
     $riot_api_key = Config::get('constants.riot_api_key');
@@ -182,6 +202,14 @@ function get_latest_news(){
 
 function get_news_by_id($id){
     return DB::table('news')->where('ID','=',$id)->first();
+}
+
+function get_recommendation_stats_by_id($id){
+    return RecommendationStats::findOrFail($id);
+}
+
+function get_recommendation_tags_by_id($id){
+    return RecommendationTags::findOrFail($id);
 }
 
 function create_news($title, $summary, $description, $image, $date, $composer){

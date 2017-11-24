@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\RecommendationStats;
+use App\RecommendationTags;
 use App\User;
 use DB;
 use Hash;
@@ -44,6 +46,19 @@ class UserController extends Controller
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:6|confirmed',
       ]);
+        
+        $recommendationStats = new RecommendationStats;
+        $recommendationStatsId;
+        $recommendationTagsId;
+        
+        if ($recommendationStats->save()){
+            $recommendationStatsId = $recommendationStats->id;
+        }
+        
+        $recommendationTags = new RecommendationTags;
+        if ($recommendationTags->save()){
+            $recommendationTagsId = $recommendationTags->id;
+        }
 
       $user = new User();
       $user->name = $request->name;
@@ -51,6 +66,8 @@ class UserController extends Controller
       $user->summoner_name = $request->summoner_name;
       $user->password = Hash::make($request->password);
       $user->admin = 0;
+      $user->recommendation_tags_id = $recommendationTagsId;
+      $user->recommendation_stats_id = $recommendationStatsId;
 
       if ($user->save()){
           return redirect()->route('users.show', $user->id);

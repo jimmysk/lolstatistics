@@ -33,7 +33,7 @@
                 <div class="form-group">
                   <label for="description" class="col-lg-2 control-label">Description</label>
                   <div class="col-lg-10">
-                    <input id="description" type="text" class="form-control" name="description" value="{{ $news->Description }}">
+                     <textarea id="description" class="form-control" rows="4" cols="50" name="description">{{ $news->Description }}</textarea>
                   </div>
                 </div>
                 <div class="form-group">

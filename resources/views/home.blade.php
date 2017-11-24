@@ -20,10 +20,12 @@
 		<h1>LoL Bestiary</h1>
 	</div>
 	
+	@if (Auth::user())
     <div class="panel panel-default">
     	<div class="panel-heading">
     		<h4>Recommended Champions</h4>
     	</div>
+    	
     	<div class=panel-body>
     		@foreach($recommendedChampions as $champ)
                 <div class="img-with-text" style="float: left; width: 120px; margin: 5px">
@@ -31,9 +33,10 @@
                     <p>{!! $champ->Name !!}</p>
                 </div>
             @endforeach
-    	</div>
+    	</div>   	
     	
     </div>
+    @endif
     
     <div class="panel panel-default">
     	<div class="panel-heading">
