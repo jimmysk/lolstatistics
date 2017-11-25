@@ -50,7 +50,7 @@ class NewsController extends Controller
             if ($request->file != null){
                 $file->move('img', $file->getClientOriginalName());
                 $imgPath = 'img/'.$file->getClientOriginalName();
-    
+
                 $news->Image = $imgPath;
             }
             $news->save();

@@ -105,7 +105,7 @@ function updateChampionsData(){
                                     MPRegenPerLevel, CritPerLevel, SpellBlockPerLevel, Crit, MPRegen, SpellBlock, HPRegen,
                                     HPPerLevel) VALUES('$id','$armorperlevel','$attackdamage','$mpperlevel','$attackspeedoffset','$mp', '$armor', '$hp',
                                     '$hpregenperlevel','$attackspeedperlevel', '$attackrange', '$movespeed', '$attackdamageperlevel', '$mpregenperlevel',
-                                    '$critperlevel', '$spellblockperlevel', '$crit', '$mpregen', '$spellblock', '$hpregen', '$hpregenperlevel')";
+                                    '$critperlevel', '$spellblockperRGAPI-8ba4473c-82b0-4584-b5ae-b5a68fc038c9level', '$crit', '$mpregen', '$spellblock', '$hpregen', '$hpregenperlevel')";
         if(!$result = $con->query($sql)){
             die('There was an error running the query [' . $con->error . ']');
         }
@@ -127,6 +127,11 @@ function selectRecommendedChampions($tag1, $tag2){
 function selectChampionByName($championName){
 
     return DB::table('champions')->where('Name','=',$championName)->first();
+}
+
+function selectChampionById($id){
+
+    return DB::table('champions')->where('ID','=',$id)->first();
 }
 
 function selectChampionInfos($championId){
@@ -165,16 +170,16 @@ function get_matches_by_account_id($accountId){
     $ch = curl_init();
     $riot_api_key = Config::get('constants.riot_api_key');
     curl_setopt($ch, CURLOPT_URL, 'https://eun1.api.riotgames.com/lol/match/v3/matchlists/by-account/'.$accountId.'/recent?api_key='.$riot_api_key);
-    
+
     // Set so curl_exec returns the result instead of outputting it.
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     // Get the response and close the channel.
     $response = curl_exec($ch);
     curl_close($ch);
-    
+
     $recentMatches = json_decode($response, true);
-    
+
     return $recentMatches;
 }
 

@@ -39,7 +39,7 @@
                 <div class="form-group">
                 	<div class="col-lg-10">
                 		<label>Select image to upload:</label>
-				    	<input type="file" name="file" id="file">	
+				    	<input type="file" name="file" id="file">
                 	</div>
                 </div>
                 <div class="form-group">
@@ -49,7 +49,7 @@
                 </div>
              	<div class="form-group">
              		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-             	</div>   
+             	</div>
 
                 </div>
               </fieldset>

@@ -11,7 +11,7 @@
     <div>
     <h1 class="main-text">{!! $news->Title !!}</h1>
     </div>
-    
+
     <div class="row">
     	<div class="col-md-4">
     		@if($news->Image != null)
@@ -22,18 +22,13 @@
     		<h3>{!! $news->Summary !!}</h3>
     		<h4>Composed by: {!! $news->Composer !!}</h4>
     		<h5>Date: {!! $news->updated_at!!}</h5>
-    	</div>
-    </div>
-    
-    <div class="row">
-    	<div class="col-md-12">
-        	<p>
-        	{!! $news->Description !!}
-        	</p>
+        <br></br>
+        <p style="font-size: 1.3em">
+        {!! $news->Description !!}
+        </p>
     	</div>
     </div>
 </div>
 
 
 @stop
-            

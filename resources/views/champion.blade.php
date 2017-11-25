@@ -29,7 +29,7 @@ body {
 	<div class="col-md-4">
     	<div class="panel panel-default">
     		<div class="panel-heading">
-    			<h4>Champion Infos</h4>		
+    			<h4>Champion Infos</h4>
     		</div>
     		<div class="panel-body">
     			<h5>Attack</h5>
@@ -59,7 +59,7 @@ body {
         	</div>
 		</div>
 	</div>
-	@if (Auth::user() && !array_key_exists('status', $championMastery))
+	@if (Auth::user() && Auth::user()->summoner_name != null && !array_key_exists('status', $championMastery))
 	<div class="col-md-2 pull-right">
 		<div class="panel panel-default">
 			<div class="panel-heading" style="text-align: center">
@@ -184,7 +184,7 @@ $('#skins-modal').on('show.bs.modal', function (event) {
 	  var skinNum = skin.data("num");
 	  console.log(skinName);
 	  console.log(skinNum);
-	  
+
 	  var modal = $(this);
 	  modal.find('.modal-title').text(skinName);
 	  modal.find('.modal-body img').attr("src", "http://ddragon.leagueoflegends.com/cdn/img/champion/splash/{!! $champion->ChampKey !!}_" + skinNum + ".jpg")

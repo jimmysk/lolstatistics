@@ -11,6 +11,8 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/champions', ['uses' => 'IndexController@index'])->name('champions');
 Route::get('/contact', ['uses' => 'ContactController@contact'])->name('contact');
 Route::post('/contact/send', ['as' => 'contact.send', 'uses' => 'ContactController@send']);
@@ -19,10 +21,11 @@ Route::get('/champion/{championName}', [ 'uses' => 'ChampionController@championP
 
 Route::get('/news/{newsId}', [ 'uses' => 'NewsController@show']);
 
-Auth::routes();
-
 Route::get('/home', 'HomeController@home')->name('home');
 Route::get('/users/logout', 'Auth\LoginController@userLogout')->name('user.logout');
+
+Route::get('/editData/{id}', 'HomeController@editData')->name('user.editData');
+Route::post('/updateuserdata/{id}', 'HomeController@updateUserData')->name('user.updateUserData');
 
 
 Route::prefix('manage')->group(function() {
