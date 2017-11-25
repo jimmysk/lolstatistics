@@ -28,7 +28,7 @@ Route::get('/editData/{id}', 'HomeController@editData')->name('user.editData');
 Route::post('/updateuserdata/{id}', 'HomeController@updateUserData')->name('user.updateUserData');
 
 
-Route::prefix('manage')->group(function() {
+Route::prefix('manage')->middleware('admin')->group(function() {
     Route::get('/', 'ManageController@index');
     Route::get('/dashboard', 'ManageController@dashboard')->name('manage.dashboard');
     Route::get('users/{id}/delete', ['as' => 'users.delete', 'uses' => 'UserController@destroy']);

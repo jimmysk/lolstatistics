@@ -18,7 +18,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = User::all();
         $users = User::orderBy('id','desc')->paginate(10);
         return view('manage.table')->withUsers($users);
     }
@@ -46,15 +45,15 @@ class UserController extends Controller
         'email' => 'required|string|email|max:255|unique:users',
         'password' => 'required|string|min:6|confirmed',
       ]);
-        
+
         $recommendationStats = new RecommendationStats;
         $recommendationStatsId;
         $recommendationTagsId;
-        
+
         if ($recommendationStats->save()){
             $recommendationStatsId = $recommendationStats->id;
         }
-        
+
         $recommendationTags = new RecommendationTags;
         if ($recommendationTags->save()){
             $recommendationTagsId = $recommendationTags->id;

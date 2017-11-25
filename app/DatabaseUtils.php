@@ -105,7 +105,7 @@ function updateChampionsData(){
                                     MPRegenPerLevel, CritPerLevel, SpellBlockPerLevel, Crit, MPRegen, SpellBlock, HPRegen,
                                     HPPerLevel) VALUES('$id','$armorperlevel','$attackdamage','$mpperlevel','$attackspeedoffset','$mp', '$armor', '$hp',
                                     '$hpregenperlevel','$attackspeedperlevel', '$attackrange', '$movespeed', '$attackdamageperlevel', '$mpregenperlevel',
-                                    '$critperlevel', '$spellblockperRGAPI-8ba4473c-82b0-4584-b5ae-b5a68fc038c9level', '$crit', '$mpregen', '$spellblock', '$hpregen', '$hpregenperlevel')";
+                                    '$critperlevel', '$spellblockperlevel', '$crit', '$mpregen', '$spellblock', '$hpregen', '$hpregenperlevel')";
         if(!$result = $con->query($sql)){
             die('There was an error running the query [' . $con->error . ']');
         }
