@@ -1,6 +1,9 @@
 <?php
 
-function getRecommendedChampionsForUser($user){
+use App\Services\ChampionService;
+use App\Services\UserService;
+
+function getRecommendedChampionsForUser(UserService $userService, ChampionService $championService, $user){
     $recommendationStats = get_recommendation_stats_by_id($user->recommendation_stats_id);
     $recommendationTags = get_recommendation_tags_by_id($user->recommendation_tags_id);
     $tag1 = 'Fighter';
@@ -44,18 +47,18 @@ function getRecommendedChampionsForUser($user){
 
     $user_prefs = array($recommendationStats->atk, $recommendationStats->def, $recommendationStats->mag, $recommendationStats->dif);
     if ($user->summoner_name != null){
-        $summoner = get_summoner_by_name($user->summoner_name);
-        $recentMatches = get_matches_by_account_id($summoner['accountId']);
+        $summoner = $userService->get_summoner_by_name($user->summoner_name);
+        $recentMatches = $userService->get_matches_by_account_id($summoner['accountId']);
         $matches = $recentMatches['matches'];
         $recent_match_infos = array(0, 0, 0, 0);
         $recent_tags = array(0,0,0,0,0,0);
         foreach($recentMatches['matches'] as $match){
-            $recent_info = selectChampionInfos($match['champion']);
+            $recent_info = $championService->selectChampionInfos($match['champion']);
             $recent_match_infos[0] += $recent_info->Attack;
             $recent_match_infos[1] += $recent_info->Defense;
             $recent_match_infos[2] += $recent_info->Magic;
             $recent_match_infos[3] += $recent_info->Difficulty;
-            $recent_champ = selectChampionById($match['champion']);
+            $recent_champ = $championService->selectChampionById($match['champion']);
             $tag2 = 'Fighter';
             $max = 0;
             if (strpos($recent_champ->Tags, 'Fighter') !== false){
@@ -109,7 +112,7 @@ function getRecommendedChampionsForUser($user){
     }
     $euclidean = new \Euclidean();
     $dist = array();
-    $table = selectRecommendedChampions($tag1, $tag2);
+    $table = $championService->selectRecommendedChampionsByTags($tag1, $tag2);
 
     $index = 0;
     foreach ($table as $posibleRecom){

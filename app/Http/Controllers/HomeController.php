@@ -6,12 +6,12 @@ include (app_path().'/DatabaseUtils.php');
 include (app_path().'/Euclidean.php');
 include (app_path().'/RecommendationFunctions.php');
 
+use App\User;
+use App\Services\ChampionService;
+use App\Services\NewsService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Euclidean;
-use App\RecommendationTags;
-use App\User;
-use DB;
 
 
 class HomeController extends Controller
@@ -31,17 +31,17 @@ class HomeController extends Controller
      *
      * @`return \Illuminate\Http\Response
      */
-    public function home()
+    public function home(UserService $userService, ChampionService $championService, NewsService $newsService)
     {
         if (!Auth::guest()){
             $user = Auth::user();
-            $recommendedChampions = getRecommendedChampionsForUser($user);
+            $recommendedChampions = getRecommendedChampionsForUser($userService, $championService, $user);
 
-            $latestNews = get_latest_news();
+            $latestNews = $newsService->getLatestNews(7);
             return view('home', compact('recommendedChampions', 'latestNews'));
         }
 
-        $latestNews = get_latest_news();
+        $latestNews = $newsService->getLatestNews(7);
         return view('home', compact('latestNews'));
 
     }

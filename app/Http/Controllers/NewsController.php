@@ -5,6 +5,7 @@ include (app_path().'/DatabaseUtils.php');
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\News;
+use App\Services\NewsService;
 
 class NewsController extends Controller
 {
@@ -23,9 +24,9 @@ class NewsController extends Controller
     }
 
 
-    public function show($newsId){
+    public function show(NewsService $newsService, $newsId){
 
-        $news = get_news_by_id($newsId);
+        $news = $newsService->get_news_by_id($newsId);
         return view('news', compact('news'));
 
     }

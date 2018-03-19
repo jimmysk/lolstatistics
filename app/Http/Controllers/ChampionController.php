@@ -8,24 +8,26 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use App\RecommendationStats;
 use App\RecommendationTags;
+use App\Services\ChampionService;
+use App\Services\UserService;
 
 class ChampionController extends Controller
 {
 
-    public function championPage($championName){
+    public function championPage(ChampionService $championService, UserService $userService, $championName){
         $summoner = null;
         $championMastery = null;
 
-        $champion = selectChampionByName($championName);
-        $infos = selectChampionInfos($champion->ID);
-        $stats = selectChampionStats($champion->ID);
-        $skins = selectChampionSkins($champion->ID);
+        $champion = $championService->selectChampionByName($championName);
+        $infos = $championService->selectChampionInfos($champion->ID);
+        $stats = $championService->selectChampionStats($champion->ID);
+        $skins = $championService->selectChampionSkins($champion->ID);
 
         if (!Auth::guest()){
             $user = Auth::user();
             if ($user->summoner_name != null){
-                $summoner = get_summoner_by_name($user->summoner_name);
-                $championMastery = get_champion_mastery_by_summoner($champion->ID, $summoner['id']);
+                $summoner = $userService->get_summoner_by_name($user->summoner_name);
+                $championMastery = $userService->get_champion_mastery_by_summoner($champion->ID, $summoner['id']);
             }
 
             $recommendationStats = get_recommendation_stats_by_id($user->recommendation_stats_id);
